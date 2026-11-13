@@ -1,0 +1,12 @@
+# R and RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+# Downloaded GEO data and generated analysis outputs
+data/raw/
+results/
+
+# Keep directories visible while excluding generated files.
+!data/raw/.gitkeep
+!results/.gitkeep
