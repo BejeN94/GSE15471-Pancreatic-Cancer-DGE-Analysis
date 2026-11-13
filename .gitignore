@@ -7,6 +7,3 @@
 data/raw/
 results/
 
-# Keep directories visible while excluding generated files.
-!data/raw/.gitkeep
-!results/.gitkeep

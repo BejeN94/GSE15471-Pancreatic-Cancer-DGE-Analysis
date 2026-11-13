@@ -178,8 +178,13 @@ utils::write.csv(
 # Attach available symbols from the GEO platform feature annotation.
 feature_data <- Biobase::fData(eset)
 symbol_col <- grep("gene.?symbol|symbol", names(feature_data), ignore.case = TRUE, value = TRUE)
-if (length(symbol_col)) {
-  symbols <- as.character(feature_data[probe_results$probe_id, symbol_col[1]])
+if (length(symbol_col) && !is.null(rownames(feature_data))) {
+  feature_idx <- match(probe_results$probe_id, rownames(feature_data))
+  symbols <- rep(NA_character_, nrow(probe_results))
+  has_feature <- !is.na(feature_idx)
+  symbols[has_feature] <- as.character(
+    feature_data[[symbol_col[1]]][feature_idx[has_feature]]
+  )
   probe_results$gene_symbol <- symbols
 } else {
   probe_results$gene_symbol <- NA_character_
